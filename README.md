@@ -1,6 +1,8 @@
 # Inventario
-#Autor
+##Autor
 This proyect was done with the collaboration of https://github.com/NahuelHerrlein and https://github.com/SeSShomaru4231
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.2.
 
 ## Development server
