@@ -1,0 +1,13 @@
+body {
+  background-color:rgb(68, 102, 98);
+}
+
+thead {
+  background-color: darkturquoise;
+  font-family: Calibri, Myriad;
+}
+
+th {
+  background-color: bisque;
+  color: blueviolet;
+}

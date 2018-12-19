@@ -1,0 +1,91 @@
+<script>
+  $('#editor').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var recipient = button.data('whatever')
+    var modal = $(this)
+    modal.find('.modal-title').text('New message to ' + recipient)
+    modal.find('.modal-body input').val(recipient)
+  });
+  $("#cerrar").click(function () {
+    location.reload()
+  });
+</script>
+<div class="cont">
+  <div>
+    <h5>Articulos</h5>
+    <button class="btn" data-toggle="modal" (click)="newOne()" data-target="#editor"><i class="material-icons">border_color</i> Nuevo</button>
+  </div>
+  <table class="table">
+    <thead class="thead">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Precio Compra</th>
+        <th scope="col">Precio Venta</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Rubro</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let art of articulos">
+        <th scope="row">{{art.codigo}}</th>
+        <td>{{art.nombre}}</td>
+        <td>{{art.descripcion}}</td>
+        <td>{{art.preciocompra | currency: 1 : "$ "}}</td>
+        <td>{{art.precioventa | currency: 1 : "$ "}}</td>
+        <td>{{art.cantidad | number:'1.0'}}</td>
+        <td>{{art.rubro.nombre}}</td>
+        <td>
+          <button class="btn btn-sm btn-success" data-toggle="modal" (click)="editar(art.codigo)" data-target="#editor"><i
+              class="material-icons">edit</i></button>
+          <button class="btn btn-sm btn-danger" (click)='borrar(art.codigo)'><i class="material-icons">delete</i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="editor" class="modal fade" role="dialog" aria-labelledby="Editar articulo" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{titulo}}</h5>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="codigo">Codigo:</label>
+            <input type="text" name="" id="" class="form-control" [(ngModel)]="articulo.codigo" maxlength="3">
+          </div>
+          <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="" id="" class="form-control" [(ngModel)]="articulo.nombre">
+          </div>
+          <div class="form-group">
+            <label for="descripcion">Descripción:</label>
+            <input type="text" name="" id="" class="form-control" [(ngModel)]="articulo.descripcion">
+          </div>
+          <div class="form-group">
+            <label for="preciocompra">Precio Compra:</label>
+            <input type="number" name="" id="" class="form-control" min="0.0" [(ngModel)]="articulo.preciocompra">
+          </div>
+          <div class="form-group">
+            <label for="precioventa">Precio Venta:</label>
+            <input type="number" name="" id="" class="form-control" min="0.0" [(ngModel)]="articulo.precioventa">
+          </div>
+          <div class="form-group">
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" name="" id="" class="form-control" [(ngModel)]="articulo.cantidad">
+          </div>
+          <div class="form-group">
+            <label for="rubro">Rubro:</label>
+            <select name="rubro" [(ngModel)]="articulo.rubro.id">
+                <option value='{{rubro.id}}' *ngFor="let rubro of rubros">{{ rubro.nombre }}</option>
+            </select>
+          </div>
+          <button type="button" value="Guardar" (click)="subirModificacionArticulo()" id="guardar">Guardar</button>
+          <button type="button" value="Cerrar" class="close" data-dismiss="modal" onclick="location.reload()">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

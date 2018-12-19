@@ -1,0 +1,20 @@
+.cont {
+    margin-top: 5%;
+}
+
+thead {
+    background-color: darkturquoise;
+    font-family: Calibri, Myriad;
+}
+
+th {
+    background-color: bisque;
+    color: blueviolet;
+}
+#editor{
+    overflow: hidden;
+}
+.modal-dialog{
+    width: 100% !important;
+    max-width: 100% !important;
+}

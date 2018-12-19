@@ -1,0 +1,56 @@
+<div class="cont">
+  <div>
+    <h5>{{ titulo }}</h5>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Razon Social</th>
+        <th scope="col">Cuit</th>
+        <th scope="col">Condicion IVA</th>
+        <th scope="col"><button class="btn btn-sm btn-outline-success" (click)="newOne()" data-target="#editor"
+            data-toggle="modal">Nuevo</button></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let clie of clientes">
+        <th scope="row">{{clie.id}}</th>
+        <td>{{clie.razonsocial}}</td>
+        <td>{{clie.cuit}}</td>
+        <td>{{clie.condicioniva}}</td>
+        <td>
+          <button class="btn btn-sm btn-outline-primary" (click)="editar(clie.id)" data-target="#editor" data-toggle="modal">
+            <i class="material-icons">edit</i></button>
+          <button class="btn btn-sm btn-outline-danger" (click)="borrar(clie.id)">
+            <i class="material-icons">delete</i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="editor" class="modal fade" role="dialog" aria-labelledby="Editar clientes" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{titulo}}</h5>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="nombre">Razon Social:</label>
+            <input type="text" name="" id="" class="form-control" [(ngModel)]="cliente.razonsocial">
+          </div>
+          <div class="form-group">
+            <label for="nombre">Cuit:</label>
+            <input type="text" name="" id="" class="form-control" [(ngModel)]="cliente.cuit">
+          </div>
+          <div class="form-group">
+            <label for="nombre">Condicion Iva:</label>
+            <input type="text" name="" id="" class="form-control" [(ngModel)]="cliente.condicioniva">
+          </div>
+          <button (click)="modificarCliente()" data-dismiss="modal">Guardar</button>
+          <button class="close" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,102 @@
+<div class="cont">
+  <div>
+    <h5>{{ titulo }}</h5>
+  </div>
+  <div [formGroup]="listaventaForm">
+    <label for="inputCliente">cliente</label>
+    <select class="form-control" name="cliente" (change)="cambiaCliente()" formControlName="clienteControl">
+      <option [ngValue]=0>Todos</option>
+      <option [ngValue]="clie.id" *ngFor="let clie of clientes">{{ clie.razonsocial }}</option>
+    </select>
+  </div>
+  <div *ngIf="facturas.length === 0">No registra facturas.</div>
+  <div *ngIf="facturas.length > 0">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Sucursal</th>
+          <th scope="col">Numero</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fac of facturas">
+          <th scope="row">{{fac.id}}</th>
+          <td>{{fac.fecha | date: 'dd/MM/yyyy'}}</td>
+          <td>{{fac.puntoventa}}</td>
+          <td>{{fac.numero}}</td>
+          <td>{{fac.tipo}}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editor" (click)="verFactura(fac.id)">Ver</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="editor" class="modal fade" role="dialog" aria-labelledby="Editar factura" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">{{titulo}}</h5>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <div>
+                <label>Cliente: {{ cliente.razonsocial }} | Cuit: {{ cliente.cuit }} | Condicion IVA: {{
+                  cliente.condicioniva }}</label>
+              </div>
+              <div>
+                <label>Tipo Factura: {{ factura.tipo }} | Sucursal: {{ factura.puntoventa }} | Numero: {{
+                  factura.numero }}
+                  | Fecha: {{ factura.fecha| date: 'dd/MM/yyyy' }}
+                </label>
+              </div>
+
+              <div>
+                <table class="table table-striped">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">Cantidad</th>
+                      <th scope="col">Código</th>
+                      <th scope="col">Descripción</th>
+                      <th scope="col">Precio Unitario</th>
+                      <th scope="col">IVA</th>
+                      <th scope="col">Subtotal</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of factura.items">
+                      <th scope="row">{{ item.cantidad }}</th>
+                      <td>{{ item.codigoproducto }}</td>
+                      <td>{{ item.descripcion }}</td>
+                      <td>{{ item.preciounitario }}</td>
+                      <td>{{ item.iva }}</td>
+                      <td>{{ item.subtotal | currency: 1 : "$ " }}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div *ngIf="coniva">IVA 21%: {{ factura.iva21 | currency: 1 : "$ " }}</div>
+                      </td>
+                      <td>
+                        <div *ngIf="coniva">IVA 10.5%: {{ factura.iva10 | currency: 1 : "$ " }}</div>
+                      </td>
+                      <td>
+                        <div *ngIf="coniva">Subtotal IVA: {{ factura.subtotaliva | currency: 1 : "$ " }}</div>
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td>Total:<strong> {{ factura.total | currency: 1 : "$ " }} </strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <button type="button" value="Cerrar" class="close" data-dismiss="modal" onclick="location.reload()">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+.navbar-brand:hover {
+    background-color: aquamarine;
+  }
+
+.btn {
+  border-color: black;
+  border-radius: 10%;
+  margin: 5px;
+}
+
+.btn:hover {
+  background-color: aquamarine;
+  color: black;
+}
