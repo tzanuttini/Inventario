@@ -1,5 +1,5 @@
 # Inventario
-##Autor
+## Autor
 This proyect was done with the collaboration of https://github.com/NahuelHerrlein and https://github.com/SeSShomaru4231
 
 
