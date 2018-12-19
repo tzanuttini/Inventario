@@ -1,7 +1,7 @@
 const env = {
   listenOn: 'localhost',
   puerto: 3000,
-  database: 'Stock',
+  database: 'Lab4TPFinal',
   usuario: 'postgres',
   clave: 'postgres',
   host: 'localhost',
